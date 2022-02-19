@@ -1,0 +1,13 @@
+nav{
+    
+position:sticky;
+display:block;
+top:0;
+
+}
+
+#basic-navbar-nav{
+    justify-content: flex-end;
+   
+}
+
