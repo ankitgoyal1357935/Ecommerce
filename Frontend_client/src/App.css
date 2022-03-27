@@ -1,0 +1,16 @@
+.App {
+  text-align: center;
+
+}
+a{
+  text-decoration: none;
+}
+.contain{
+
+  width: 90%;
+  height:30vh;
+  display:flex;
+  justify-content:space-between;
+  margin: auto;
+
+}
