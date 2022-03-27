@@ -14,7 +14,7 @@ const Home = () => {
             
         });
         
-    },[])
+    },[dat])
     
  
     return (

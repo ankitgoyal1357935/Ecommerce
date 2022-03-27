@@ -5,7 +5,7 @@ import { Form, Button, Nav } from "react-bootstrap";
 const Login = () => {
 const[email ,setEmail] = useState("");
 const[password ,setPassword] = useState("");
-
+const [log,setLog] = useState(false);
 
 useEffect(()=>{
 console.log(email);
@@ -17,11 +17,13 @@ const addData = ()=>{
     email,
     password
 }
-fetch("http://localhost:7777/api/auth/login",{method: "POST",headers: {'Accept': 'application/json','Content-Type': 'application/json'},body: JSON.stringify(cred)}).then(res => res.json()).then(data => console.warn(data) );
+var loga = fetch("http://localhost:7777/api/auth/login",{method: "POST",headers: {'Accept': 'application/json','Content-Type': 'application/json'},body: JSON.stringify(cred)}).then(res => res.json()).then(data => data.json );
+     
+setLog(loga.success);
 
 }
 
-  return (
+  return log==false? (
     <>
       <form >
         <div className="container container-fluid">
@@ -42,6 +44,8 @@ fetch("http://localhost:7777/api/auth/login",{method: "POST",headers: {'Accept':
       <Nav.Link href="/api/auth/register"> Create a new account</Nav.Link>
 
     </>
+  ):(
+    window.location.href = "/home"
   )
 }
 

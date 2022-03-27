@@ -10,6 +10,7 @@ import {
   import Productview from '../pages/Productview';
   import Cart from '../pages/Cart';
   import Register from '../pages/Register';
+  import Error from '../pages/Error';
 
 const ReactBody = () => {
   return (
@@ -23,6 +24,7 @@ const ReactBody = () => {
       <Route exact path="/cart" element={<Cart imgsc={"https://media.istockphoto.com/vectors/shopping-cart-icon-isolated-on-white-background-vector-id1206806317?s=612x612"} />} />
       <Route exact path="/productview" element={<Productview />} />
       <Route exact path="/api/auth/register" element={<Register />} />
+      <Route  path="*" element={<Error/>} />
     </Routes> 
 
 
