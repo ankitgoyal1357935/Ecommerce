@@ -1,27 +1,23 @@
 import React from "react";
+import Cartbox from "../component/cartbox";
 
 
 
-const Cart =(props)=>{
+const Cart = (props) => {
 
-    
+
     const queryParams = new URLSearchParams(window.location.search);
     const imgsrc = queryParams.get('imgsrc');
-  
-  
-return(
+    const title = queryParams.get('title');
+    const description = queryParams.get('description');
 
-    <>
-    <div style={{width: '100vw',minHeight:"90vh", margin:"10px",height: '30vh'}}>
 
-    <div style={{ backgroundColor:"gray",width: "70%", height: '20vh', display: "flex", justifyContent:"flex-start"}}>
+    return (
 
-    <img src={imgsrc} alt={props.alt} style={{width:"20%"}}/>
-      
-    </div>
-    </div>
-    </>
-)
+        <>
+        <Cartbox imgsrc={imgsrc} title={title} description={description}/>
+        </>
+    )
 }
 
 export default Cart;

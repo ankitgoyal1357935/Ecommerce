@@ -14,7 +14,7 @@ const Carde = (props) => {
         <a href={`/productview?imgsrc=${props.imgsrc}&title=${props.title}&description=${props.description}`} style={{textDecoration:"none",color:"black"}}>
 
                 <Card style={{ width: '12rem', border: "none", textAlign: "center" }} >
-                    <Card.Img  className="cardim" variant="top" src={props.imgsrc} />
+                    <Card.Img  className="cardim" variant="top" src={props.imgsrc} style={{width: '22vw', height: '16vh', objectFit:"cover"}} />
                     <Card.Body>
                         <Card.Title>{props.title}</Card.Title>
                         <Card.Text>
