@@ -1,0 +1,50 @@
+[
+    {
+        "title": "App Mac Book pro",
+        "imgsc": "https://m.media-amazon.com/images/I/71an9eiBxpL._AC_UY327_QL65_.jpg",
+        "price": 70000,
+        "brand": "Apple",
+        "desc": " this is our latest apple laptop",
+        "category":"laptop"
+    },
+    {
+        "title": "Hp pavallion 360",
+        "imgsc": "https://images-eu.ssl-images-amazon.com/images/I/41rq-tqCMfL._SY300_SX300_QL70_FMwebp_.jpg",
+        "price": 80000,
+        "brand": "HP",
+        "desc": " this is our latest hp laptop",
+        "category":"laptop"
+    },
+    {
+        "title": "Lenovo Ideapad",
+        "imgsc": "https://m.media-amazon.com/images/I/61WNxdAeAoL._AC_UY327_QL65_.jpg",
+        "price": 53000,
+        "brand": "Lenovo",
+        "desc": " this is our latest lenovo laptop",
+        "category":"laptop"
+    },
+    {
+        "title": "Mi NoteBook Pro",
+        "imgsc": "https://m.media-amazon.com/images/I/71iiXU7HHkL._AC_UY327_QL65_.jpg",
+        "price": 73000,
+        "brand": "Mi",
+        "desc": " this is our latest mi laptop",
+        "category":"laptop"
+    },
+    {
+        "title": "VivoBook X515",
+        "imgsc": "https://m.media-amazon.com/images/I/31fSJNvyOnL._AC_UY327_QL65_.jpg",
+        "price": 60000,
+        "brand": "Asus",
+        "desc": " this is our latest asus laptop",
+        "category":"laptop"
+    },
+    {
+        "title": "Dell New 15",
+        "imgsc": "https://m.media-amazon.com/images/I/61XR0oGhF6L._SX679_.jpg",
+        "price": 40000,
+        "brand": "Dell",
+        "desc": " this is our latest dell laptop",
+        "category":"laptop"
+    }
+]
