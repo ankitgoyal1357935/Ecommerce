@@ -1,7 +1,7 @@
 import {Carousel} from "react-bootstrap";
-import laptopfront from "../images/laptopfront.jpg";
-import cloths from "../images/cloths.jpg";
-import appleprod from "../images/appleprod.jpg";
+import laptopfront from "../../images/laptopfront.jpg";
+import cloths from "../../images/cloths.jpg";
+import appleprod from "../../images/appleprod.jpg";
 import "./Slider.css" ;
 
 const Slider = ()=>{

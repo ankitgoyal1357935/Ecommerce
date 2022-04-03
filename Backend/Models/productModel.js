@@ -15,23 +15,54 @@ const productSchema = new mongoose.Schema({
 
     },
 
-    imgsc: {
+    img: {
         type: String,
         required: true
     }
     ,
-    category: {
+    categories: {
         type: Array,
-        
 
-    }, 
 
-    brand:{
+    },
+    size: {
+        type: Array
+    },
+    color: {
+        type: Array
+    },
+
+    brand: {
         type: String
     },
     price: {
         type: Number,
         required: true
+    },
+    rating: {
+        type: Number,
+        default: 4
+    },
+    reviews: [{
+        review:{
+        userId: {
+            type: mongoose.Types.ObjectId,
+            ref: "User"
+        },
+
+        comment: {
+            type: String
+        }
+        ,
+        CreatedAt: {
+            type: Date,
+            default: Date.now()
+        }
+    }
+    }],
+    instock: {
+        type: Number,
+        default: 1
     }
 
 

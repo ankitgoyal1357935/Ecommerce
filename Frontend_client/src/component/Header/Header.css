@@ -1,0 +1,31 @@
+nav{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+position:sticky;
+display:block;
+top:0;
+
+}
+
+#basic-navbar-nav{
+    justify-content: flex-end;
+   
+}
+
+.navbar-nav{
+    
+    width:90%;
+    display:flex;
+    justify-content: flex-end
+}
+
+.form-inline{
+    width:60%;
+}
+
+#navbarSupportedContent{
+    width: 40%;
+    
+    justify-content: flex-end
+}

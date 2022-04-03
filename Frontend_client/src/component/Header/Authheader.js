@@ -27,7 +27,10 @@ const Header = ()=>{
         <a className="nav-link" href="/"><i className="fa fa-home"></i> &nbsp; Home </a>
       </li>
       <li className="nav-item">
-        <a className="nav-link" href="/api/auth/login"><i className="fa fa-user"></i>&nbsp; Login</a>
+        <a className="nav-link" href="/product"><i className="fa fa-user"></i>&nbsp; Products</a>
+      </li>
+      <li className="nav-item">
+        <a className="nav-link" href="/logout"><i className="fa fa-user"></i>&nbsp;Logout</a>
       </li>
       <li className="nav-item">
         <a className="nav-link" href="/cart"><i className="fa fa-cart"></i>&nbsp; Cart</a>
