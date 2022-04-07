@@ -1,45 +1,50 @@
 import React, { useState } from 'react';
 import { Form, Button } from "react-bootstrap";
-import {Link} from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
+import {login} from "../../Action/authaction" 
+import {useDispatch} from "react-redux"
 import "./Login.css";
 
 
 const Login = () => {
-   const [user, setUser] = useState({
-       
-       email:"",
-       password:""
-      
-   });
+    const [user, setUser] = useState({
+        email: "",
+        password: ""
+    });
 
-   
-const changeHandler = (e) => {
-        const{name , value} = e.target;
+    const dispatch = useDispatch();
+        console.log(dispatch);
+
+    const changeHandler = (e) => {
+        const { name, value } = e.target;
         console.log(`change ${name} ${value}`);
-        setUser({
-            ...user,
-            [name]:value
-        })
-}
-    
-    const login = async() => {
-        try{
+        setUser({ ...user, [name]: value })
+    }
 
-                const data = await fetch("http://localhost:7777/api/auth/login", { method: "POST", headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }, body: JSON.stringify(user) }).then(response => response.json());
-        
-                console.log(data);
-                localStorage.setItem("token",data.token);
-             
+    const Auth = async () => {
+        try {
+            const data = await fetch("http://localhost:7777/api/auth/login", { method: "POST", headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }, body: JSON.stringify(user) }).then(response => response.json());
+            console.log(data);
+            if (data.success) {
+                localStorage.setItem("token", data.token);
                 console.log(data.token);
-                alert("Login Successful");
+                dispatch(login(true));
+                alert("Login successful");
                 window.location ="/home";
-        
+
+            } else {
+                alert(data.message);
+                window.location = "/login"
+
+            }
+
+
 
         }
-        catch(err){
+        catch (err) {
             alert("invalid email or password");
         }
-            
+
 
     }
 
@@ -47,11 +52,11 @@ const changeHandler = (e) => {
 
 
 
-    return  (
+    return (
         <>
-        
+
             <Form className="form-container w-75 mt-5 m-auto " >
-              
+
                 <Form.Group className="mb-2 m-2" controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
                     <Form.Control type="email" value={user.email} placeholder="Enter email" name="email" autoComplete="off" onChange={changeHandler} />
@@ -61,18 +66,18 @@ const changeHandler = (e) => {
                     <Form.Control type="password" value={user.password} placeholder="Password" name="password" autoComplete="off" onChange={changeHandler} />
                 </Form.Group>
 
-           
-                <Button variant="success" style={{ textAlign: "center", margin: "auto", display: "flex" }} type="button" onClick={login}>
+
+                <Button variant="success" style={{ textAlign: "center", margin: "auto", display: "flex" }} type="button" onClick={Auth}>
                     Login
                 </Button>
 
-                <Link to ="/register"><Button>Create  Account</Button></Link>
+                <Link to="/register"><Button>Create  Account</Button></Link>
             </Form>
 
-            
-            
-            
-            
+
+
+
+
 
         </>
     )

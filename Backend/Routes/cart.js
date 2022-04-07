@@ -8,14 +8,17 @@ const { verifyToken, verifyTokenAndAuth, verifyTokenAndAdmin } = require("./veri
 
 router.post("/", verifyToken ,async (req, res) => {
          
-            const product = req.body;
-            console.log(req.user)
+            const product = req.body.product;
+            const quantity = req.body.quantity;
+                console.log(product);
+                console.log("num of quantity are "+quantity);
                 const user = await Cart.findOne({userId : req.user.id});
-                console.log(user);
+
            if(!user){
             const newCart = new Cart({
                 userId: req.user.id,
-                products:[{productId: product}]
+                products:[{productId: product}],
+                quantity: quantity,
             });
             
        
@@ -24,26 +27,35 @@ router.post("/", verifyToken ,async (req, res) => {
         
                 const cart = await newCart.save();
         
-                res.status(200).json(cart)
+                res.status(200).json({sucess:true,cart})
             } catch (err) {
                 res.status(500).json(err);
             }
         }else{
-            const data = {
-                productId: product
+
+           const arr = user.products.filter(p=>p.productId == product._id);
+                if(arr.length>0){
+                    res.status(200).json({success:false, message:"already in cart"});
+                }else{
+
+                    
+                    const data = {
+                        productId: product,
+                        quantity:quantity,
             }
             user.products = [...user.products,data]
             
             
             try {
-        
-        
+                
+                
                 const cart = await user.save();
         
-                res.status(200).json(cart)
+                res.status(200).json({success:true,cart})
             } catch (err) {
                 res.status(500).json(err);
             }
+        }
         } 
           
     
@@ -78,13 +90,27 @@ router.delete("/:id", verifyTokenAndAuth, async (req, res) => {
     }
 })
 
+router.delete("/product/:id", verifyToken, async (req, res) => {
+                  console.log(req.params.id);
+    try {
+        
+        let cart = await Cart.findOne({userid:req.user.id});
+        cart.products = (cart.products).filter(product => product.productId._id != req.params.id);
+        cart.save();
+       console.log(cart);
+        
+        res.status(200).json("item has been deleted...!")
+    } catch (err) {
+        res.status(500).json(err);
+    }
+})
+
 
 router.get("/find",verifyToken,async (req, res) => {
 
     try {
         const cart = await Cart.findOne({userId:req.user.id}).populate("products.productId");
-        console.log(cart)
-        res.status(200).json(cart)
+        res.status(200).json({success:true, cart});
     } catch (err) {
         res.status(500).json(err);
     }
@@ -93,7 +119,7 @@ router.get("/find",verifyToken,async (req, res) => {
 router.get("/", verifyTokenAndAdmin, async (req, res) => {
     try {
         const cart = await Cart.find();
-        res.status(200).json(cart);
+        res.status(200).json({success:true, cart});
      
     } catch (err) {
         res.status(500).json(err);

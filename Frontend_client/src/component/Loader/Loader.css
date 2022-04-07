@@ -1,0 +1,29 @@
+.loader{
+    width:100vw;
+    height:100vh;
+    Background:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.loader>div{
+    width:10vmax;
+    height:10vmax;
+    Background:"tomato";
+    border: 5px solid rgb(45,45,195);
+    border-bottom: 5px solid white;
+    border-radius: 50%;
+    animation: loaderRotate 1s linear infinite ;
+}
+
+
+@keyframes loaderRotate {
+   0%{
+       transform:rotateZ(0deg);
+      
+   }
+   100%{
+    transform:rotateZ(360deg);
+   }
+}

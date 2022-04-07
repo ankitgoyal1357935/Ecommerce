@@ -20,7 +20,7 @@ const productSchema = new mongoose.Schema({
         required: true
     }
     ,
-    categories: {
+    category: {
         type: Array,
 
 
@@ -62,7 +62,7 @@ const productSchema = new mongoose.Schema({
     }],
     instock: {
         type: Number,
-        default: 1
+        default: 5
     }
 
 

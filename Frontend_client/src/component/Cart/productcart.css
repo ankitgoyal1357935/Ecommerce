@@ -1,5 +1,87 @@
-.productcart{
-    width: 100%;
+.productcart {
+    width: 90%;
+    height: 200px;
+    margin: 10px;
+    padding: 15px;
     border: 1px solid black;
-    height: 35%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 6px 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.productcart-container,
+.productcart-container2,
+.productcart-container3 {
+    width: 30%;
+
+}
+
+.productcart-image {
+    width: 100%;
+    height: 100%;
+}
+
+.productcart-image>img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.productcart-quantity {
+    display: flex;
+    width: 100px
+}
+
+.productcart-quantity>button {
+    display: flex;
+    width: 50%;
+    flex: 1;
+    background-color: black;
+    border-color: black;
+    color: white;
+    justify-content: space-around;
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.2);
+
+}
+
+.productcart-quantity>input {
+    display: flex;
+    flex: 2;
+    width: 100%;
+
+    border: none;
+    color: black;
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.2);
+
+}
+
+.productcart-quantity>button:hover {
+    background-color: rgba(17, 110, 225, 0.812);
+
+}
+
+.productcart-groupbtn {
+    margin-top: 5px;
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.productcart-rating {
+    display: flex;
+
+}
+
+.productcart-rating>span {
+    font-size: 20px;
+}
+
+
+@media only screen and (max-width: 800px) {
+    .productcart {
+        
+        width: 100%;
+        min-height: 50vh;
+    }
 }

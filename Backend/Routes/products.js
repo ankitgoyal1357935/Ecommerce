@@ -57,32 +57,37 @@ router.get("/find/:id", async (req, res) => {
     try {
         const product = await Product.findById(req.params.id);
 
-        res.status(200).json(product)
+        res.status(200).json({
+            success:true,
+            product})
     } catch (err) {
         res.status(500).json(err);
     }
 })
 
 router.get("/", async (req, res) => {
-    const querycat = req.query.category;
+    const querycat = req.query.cate;
     const queryNew = req.query.new;
-
+        console.log(querycat);
 
    try {
         let products;
         if (queryNew) {
-            products = await Product.find().sort({ _id: -1 }).limit(5);
+            products = await Product.find().sort({ createdAt: -1 }).limit(5);
         } else if (querycat) {
-            products = await Product.find().sort({
+            products = await Product.find({
                 category: {
                     $in: [querycat],
                 }
             });
+    
         }
         else{
             products = await Product.find();
         }
-        res.status(200).json(products)
+        res.status(200).json({
+            success:true,
+            products,})
     } catch (err) {
         res.status(500).json(err);
     }

@@ -1,0 +1,16 @@
+
+
+.searchbox-table{
+    width:60vw;
+    overflow:hidden;
+    
+}
+.searchbox-trow{
+    border: 1px solid grey;
+    border-collapse: collapse;
+    background-color:white;
+}
+.searchbox-image{
+    width:60px;
+    height:50px;
+}

@@ -1,4 +1,75 @@
-.productContainer{
-    width: 100%;
-    min-height: 100vh;
+.productDetailContainer{
+    
+    width: 90vw;
+    margin:auto;
+    padding: 15px;
+    min-height: 80vh;
+    display: flex;
+    justify-content: space-between;
 }
+.productDC,.productDC-2,.productDC-3{
+    padding: 20px;
+    width: 30%;
+    height: 100%;
+    box-shadow:6px 6px 15px rgba(0,0,0,0.2)
+}
+
+.productDC-Image{
+   
+      width:100%;  
+    height: 80%;
+}
+
+.productDC-Image>img{
+  
+      width:100%;  
+    height: 100%;
+}
+
+.productDC-quantity{
+    display:flex;
+    width:100px
+}
+
+.productDC-quantity>button{
+    display:flex;
+    width:50%;
+    background-color: black;
+    border-color: black;
+    color:white;
+   justify-content: space-around;
+   box-shadow: 1px 1px 10px rgba(0,0,0,0.2);
+    
+}
+
+.productDC-quantity>input{
+    display:flex;
+    flex-basis: 2;
+    width:100%;
+    border:none;
+    color:black;
+    text-indent: 5px;
+    box-shadow: 1px 1px 10px rgba(0,0,0,0.2);
+    
+}
+
+.productDC-quantity>button:hover{
+    background-color:rgba(17, 110, 225, 0.812);
+
+}
+.productDC-addtocart>button{
+    box-shadow: 3px 3px 5px rgba(0,0,0,0.5),-3px -3px 5px rgba(0,0,0,0.1)
+}
+
+
+@media only screen and (max-width: 700px){
+    .productDetailContainer{
+        flex-direction: column;
+    }
+    .productDC,.productDC-2,.productDC-3{
+        width: 100%;
+        margin: 10px 0;
+    }
+
+}
+    

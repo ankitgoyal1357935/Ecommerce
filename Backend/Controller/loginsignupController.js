@@ -55,7 +55,7 @@ exports.login = async(req,res)=>{
          const token = await jwt.sign(author,process.env.SECRET_KEY,{expiresIn:"3d"});
         
 
-            res.cookie("token", token,{expires: new Date(Date.now() + 1000*60*60*24),httpOnly:true})
+            res.cookie("accesstoken", token,{expires: new Date(Date.now() + 1000*60*60*24*5),httpOnly: true})
             
         const {password, ...other} = user._doc;
 
