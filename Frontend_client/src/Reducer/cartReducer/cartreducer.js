@@ -1,6 +1,5 @@
 
-
-const addToCartReducer = (state = { products:[] }, action) => {
+export const addToCartReducer = (state = { cart:[] }, action) => {
 
     switch (action.type) {
         case "ADD_CART_REQUEST":
@@ -25,4 +24,60 @@ const addToCartReducer = (state = { products:[] }, action) => {
 
 }
 
-export default addToCartReducer;
+
+
+
+export const getCartReducer = (state = {products:[]}, action) => {
+
+    switch (action.type) {
+        case "GET_CART_REQUEST":
+            return {
+                ...state,
+                loading: true,
+                
+            }
+        case "GET_CART_SUCCESS":
+            return {
+                loading:false,
+                products: action.payload.products,
+            }
+        case "GET_CART_FAIL":
+            return {
+                loading:false,
+                error : action.payload
+            }    
+
+        default: return state;
+    }
+
+}
+
+
+
+
+
+export const updateCartReducer = (state = { cart:[] }, action) => {
+
+    switch (action.type) {
+        case "UPDATE_CART_REQUEST":
+            return {
+                ...state,
+                loading: true,
+                
+            }
+        case "UPDATE_CART_SUCCESS":
+            return {
+                loading:false,
+                cart: action.payload.cart,
+            }
+        case "UPDATE_CART_FAIL":
+            return {
+                loading:false,
+                error : action.payload, 
+            }    
+
+        default: return state;
+    }
+
+}
+

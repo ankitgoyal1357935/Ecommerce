@@ -22,7 +22,7 @@ import Loader from "./component/Loader/Loader"
 import{useSelector, useDispatch} from "react-redux";
 import store from "./store";
 function App() {
-
+    
   return (
     <>
       

@@ -18,6 +18,7 @@ export const addCart = (product) => async (dispatch) => {
             const {data} = await axios(config);
             console.log(data);
             dispatch({type:"ADD_CART_SUCCESS",payload:data});
+            dispatch(getCart());
         
         }catch(error){
                 dispatch({type:"ADD_CART_FAIL",payload:error.response.data.message});
@@ -45,6 +46,34 @@ export const getCart = () => async (dispatch) => {
         dispatch({type:"GET_CART_SUCCESS", payload:data.cart});
     }catch(error){
             dispatch({type:"GET_CART_FAIL",payload:error});
+
+    }
+
+}
+
+
+
+export const updateCart = (product) => async (dispatch) => {
+    try{
+
+        dispatch({type:"UPDATE_CART_REQUEST"});
+
+            const Token = localStorage.getItem("token");
+        const config ={
+            method:"PUT",
+            url:"http://localhost:7777/api/cart",
+            headers: {token:`Bearer ${Token}` ,'Content-Type': 'application/json'},
+            data:product,
+            responseType:"json"
+        }
+        
+        const {data} = await axios(config);
+        console.log(data);
+        dispatch({type:"UPDATE_CART_SUCCESS",payload:data});
+        dispatch(getCart());
+    
+    }catch(error){
+            dispatch({type:"UPDATE_CART_FAIL",payload:error.response.data.message});
 
     }
 

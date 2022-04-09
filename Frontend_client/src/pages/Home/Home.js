@@ -13,7 +13,7 @@ const Home = () => {
     const {loading,error,product} = useSelector((state )=> state.productReducer);
     useEffect(() => {
         dispatch(getProduct());
-        console.log(product);
+
     }, [dispatch])
 
 
@@ -25,7 +25,7 @@ const Home = () => {
             <div className="HomePage">
                 <h2 className="HomePage-title">Latest Products</h2>
                 <div className="HomePage-ProductList">
-                    {product && product.map((p, i) => { return <Card product={p} /> })}
+                    {product && product.map((p, i) => { return <Card product={p} key={p._id}/> })}
                 </div>
             </div>
         </>

@@ -61,13 +61,17 @@ router.post("/", verifyToken ,async (req, res) => {
     
 })
 
-router.put("/:id", verifyTokenAndAuth, async (req, res) => {
-  
+router.put("/", verifyToken, async (req, res) => {
+
+            const product = req.body.product;
+            const quantity = req.body.quantity;
 
     try {
-        const updateCart = await Cart.findByIdAndUpdate(req.params.id, {
+        const updateCart = await Cart.updateOne({$and:[{"products.productId":product},{"userId":req.user.id}]}, {
 
-            $set: req.body
+            $set:{
+                "products.$.quantity":quantity,
+            }
         },
             { new: true }
         );

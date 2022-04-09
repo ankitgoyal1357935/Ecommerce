@@ -22,7 +22,7 @@ const AllProduct = () => {
                     <h1>All Products</h1>
                 </div>
                 <div className="AllProduct-ProductList">
-                    {product && product.map((p, i) => { return <Card product={p} /> })}
+                    {product && product.map((p, i) => { return <Card product={p} key={p._id} /> })}
                 </div>
             </div>
         </>

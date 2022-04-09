@@ -3,11 +3,29 @@ import React, { useState, useEffect } from 'react';
 import $ from "jquery";
 import "./Header.css";
 import SearchBox from "../SearchBox/searchbox";
-import { useSelector } from 'react-redux';
+import {getCart} from "../../Action/cartAction/cartaction"
+import { useSelector,useDispatch } from 'react-redux';
+import Loader from "../Loader/Loader"
 const Header = () => {
+  
+  const dispatch = useDispatch();
+ 
+  useEffect(()=>{
+    dispatch(getCart());
+  },[dispatch])
+
+  const{products,loading,error} = useSelector((state)=>state.getCartReducer);
+
+  
+  console.log(products);
+  console.log(loading);
+  console.log(error);
+
   const token = localStorage.getItem("token");
   const [search, setSearch] = useState("");
   const [product, setProduct] = useState([]);
+
+
   const changeHandler = (e) => {
     setSearch(e.target.value);
     $.ajax({
@@ -19,12 +37,12 @@ const Header = () => {
           setProduct(data.products);
         } else {
           setProduct([]);
-          
         }
       }
-    })
+    });
   }
-  return (
+
+  return loading?<Loader/>: (
 
     <>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -52,19 +70,28 @@ const Header = () => {
               <li className="nav-item">
                 <a className="nav-link" href="/logout"><i className="fa fa-user"></i>&nbsp; Logout</a>
               </li>
+              <div className="dropdown">
+                <a className="btn btn-dark " href="/cart">Cart<span className="badge badge-dark">{products.length>0?products.length:""}</span></a>
+                <div className="dropdown-content">
+                  <a href="/order">Order</a>
+                  <a href="/account">Account</a>
+                  <a href="/aboutus">About us</a>
+                </div>
+              </div>
             </>
             ) :
               (<>
                 <li className="nav-item">
                   <a className="nav-link" href="/login"><i className="fa fa-user"></i>&nbsp; Login</a>
                 </li>
+                <li className="nav-item">
+              <a className="nav-link" href="/cart"><i className="fa fa-cart"></i>&nbsp; Cart <span class="badge badge-dark">{products.length>0?products.length:""}</span></a>
+            </li>
+
               </>
               )
             }
-            <li className="nav-item">
-              <a className="nav-link" href="/cart"><i className="fa fa-cart"></i>&nbsp; Cart <span class="badge badge-dark">4</span></a>
-            </li>
-
+          
 
 
           </ul>

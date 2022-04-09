@@ -3,20 +3,25 @@ import {BsFillCartPlusFill} from "react-icons/bs";
 import ReactStars from "react-rating-stars-component";
 import $ from "jquery";
 import "./productcart.css";
+import { updateCart } from '../../Action/cartAction/cartaction';
+import { useDispatch } from 'react-redux';
 
 const Productcart = ({product}) => {
     
-    const [quantity,setQuantity]  = useState(1);
+  const dispatch = useDispatch();
+    const [quantity,setQuantity]  = useState(product.quantity);
     const[del, setDel] = useState("");
 
     const increaseQuantity = () =>{
       if(product.productId.instock <=quantity)return;
       setQuantity(quantity+1);
+      dispatch(updateCart({product:product.productId,quantity:quantity+1}))
     }
 
     const decreaseQuantity = () =>{
       if(1 >=quantity)return;
       setQuantity(quantity-1);
+      dispatch(updateCart({product:product.productId,quantity:quantity-1}))
     }
 
     const options = {
@@ -62,13 +67,13 @@ const Productcart = ({product}) => {
                       <ReactStars {...options}  value={product.productId.rating} />            
                   </div> 
                       <div className="productcart-price">
-                        <h4>Price: &#8377;{product.productId.price*product.quantity}/-</h4>
+                        <h4>Price: &#8377;{product.productId.price*quantity}/-</h4>
                       </div>
                       <div className="productcart-groupbtn">
 
                       <div className="productcart-quantity" >
                         <button  onClick ={increaseQuantity} name="incnum">+</button>
-                        <input type="Number" readOnly className="form-control" value={product.quantity}></input>
+                        <input type="Number" readOnly className="form-control" value={quantity}></input>
                         <button  onClick ={decreaseQuantity} name="dececnum">-</button>
                     </div>
                       <div className="productcart-remove">

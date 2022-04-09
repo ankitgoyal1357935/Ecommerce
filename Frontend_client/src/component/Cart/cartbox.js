@@ -17,7 +17,7 @@ const  Cartbox = ({data}) => {
         <div className="cartbox-mycart">
 
           {arr.map((product, i) => {
-            return <Productcart product={product} />
+            return <Productcart product={product} key={product.productId._id} />
           })}
         </div>    
     </div>
