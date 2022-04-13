@@ -1,22 +1,28 @@
 const router = require('express').Router();
-const Order = require("../Models/orderModel");
+const Orders = require("../Models/orderModel");
+const User = require("../Models/userModel");
 const { verifyToken, verifyTokenAndAuth, verifyTokenAndAdmin } = require("./verifyToken");
 
 
 
 
 
-router.post("/", verifyToken, async (req, res) => {
+router.post("/new", verifyToken, async (req, res) => {
 
+            
 
-    const newOrder = new Order(req.body);
-    console.log(newOrder);
+            const{name,email,...other} = req.body.order.shipinfo;
+                 
+    const newOrder = new Orders({
+        userId: req.user.id,
+        products: req.body.products,
+        amount:req.body.order.totalprice,
+        address:other,
+
+    });
     try {
-
-
         const Order = await newOrder.save();
-
-        res.status(200).json(Order)
+        res.status(200).json({success:true,Order});
     } catch (err) {
         res.status(500).json(err);
     }
@@ -26,7 +32,7 @@ router.put("/:id", verifyTokenAndAdmin, async (req, res) => {
 
 
     try {
-        const updateOrder = await Order.findByIdAndUpdate(req.params.id, {
+        const updateOrder = await Orders.findByIdAndUpdate(req.params.id, {
 
             $set: req.body
         },
@@ -44,7 +50,7 @@ router.put("/:id", verifyTokenAndAdmin, async (req, res) => {
 router.delete("/:id", verifyTokenAndAdmin, async (req, res) => {
 
     try {
-        await Order.findByIdAndDelete(req.params.id);
+        await Orders.findByIdAndDelete(req.params.id);
         res.status(200).json("item has been deleted...!")
     } catch (err) {
         res.status(500).json(err);
@@ -52,12 +58,13 @@ router.delete("/:id", verifyTokenAndAdmin, async (req, res) => {
 })
 
 
-router.get("/find/:userId", verifyTokenAndAuth, async (req, res) => {
+router.get("/find", verifyToken, async (req, res) => {
 
     try {
-        const Order = await Order.findOne({ userId: req.params.userId });
+        
+        const Order = await Orders.find({ userId: req.user.id }).populate("userId products.productId");
 
-        res.status(200).json(Order)
+        res.status(200).json({success:true,Order})
     } catch (err) {
         res.status(500).json(err);
     }
@@ -65,7 +72,7 @@ router.get("/find/:userId", verifyTokenAndAuth, async (req, res) => {
 
 router.get("/", verifyTokenAndAdmin, async (req, res) => {
     try {
-        const Order = await Order.find();
+        const Order = await Orders.find();
         res.status(200).json(Order);
 
     } catch (err) {

@@ -78,3 +78,31 @@ export const updateCart = (product) => async (dispatch) => {
     }
 
 }
+
+
+export const removeCart = (id) => async(dispatch)=>{
+
+    try{
+
+        dispatch({type:"DELETE_CART_REQUEST"});
+
+            const Token = localStorage.getItem("token");
+        const config ={
+            method:"DELETE",
+            url:`http://localhost:7777/api/cart/product/${id}`,
+            headers: {token:`Bearer ${Token}` ,'Content-Type': 'application/json'},
+            responseType:"json"
+        }
+        
+        const {data} = await axios(config);
+        console.log(data);
+        dispatch({type:"DELETE_CART_SUCCESS",payload:data});
+        dispatch(getCart());
+    
+    }catch(error){
+            dispatch({type:"DELETE_CART_FAIL",payload:error});
+
+    }
+
+
+}

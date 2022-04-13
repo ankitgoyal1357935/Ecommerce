@@ -2,24 +2,26 @@
 import React, { useState, useEffect } from 'react';
 import $ from "jquery";
 import "./Header.css";
+import { Link,useNavigate } from 'react-router-dom';
 import SearchBox from "../SearchBox/searchbox";
 import {getCart} from "../../Action/cartAction/cartaction"
 import { useSelector,useDispatch } from 'react-redux';
+import {getUserAction} from "../../Action/authaction";
 import Loader from "../Loader/Loader"
 const Header = () => {
   
   const dispatch = useDispatch();
+  const {user} = useSelector((state)=>state.getUserReducer);
  
   useEffect(()=>{
     dispatch(getCart());
-  },[dispatch])
+    dispatch(getUserAction());
+  },[dispatch]);
+
+
 
   const{products,loading,error} = useSelector((state)=>state.getCartReducer);
-
-  
-  console.log(products);
-  console.log(loading);
-  console.log(error);
+    console.log(products);
 
   const token = localStorage.getItem("token");
   const [search, setSearch] = useState("");
@@ -32,7 +34,7 @@ const Header = () => {
       url: `http://localhost:7777/api/product?cate=${e.target.value}`,
       type: 'GET',
       success: function (data, status) {
-        console.log(data.products);
+   
         if (e.target.value) {
           setProduct(data.products);
         } else {
@@ -46,7 +48,7 @@ const Header = () => {
 
     <>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a className="navbar-brand" href="/home">Shoppkart</a>
+        <Link className="navbar-brand" to="/home">Shoppkart</Link>
         <form className="form-inline my-2 my-lg-0">
           <input id="#search" className="form-control w-100 mr-sm-2" type="search" placeholder="Search" aria-label="Search" onChange={changeHandler} value={search} autoComplete="off" />
         </form>
@@ -61,32 +63,37 @@ const Header = () => {
 
           <ul className="navbar-nav mr-auto">
             <li className="nav-item active">
-              <a className="nav-link" href="/"><i className="fa fa-home"></i> &nbsp; Home </a>
+              <Link className="nav-link" to="/"><i className="fa fa-home"></i> &nbsp; Home </Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="/products/"><i className="fa fa-user"></i>&nbsp; Products</a>
+              <Link className="nav-link" to="/products/"><i className="fa fa-user"></i>&nbsp; Products</Link>
             </li>
             {token ? (<>
               <li className="nav-item">
-                <a className="nav-link" href="/logout"><i className="fa fa-user"></i>&nbsp; Logout</a>
+                <Link className="nav-link" to="/logout"><i className="fa fa-user"></i>&nbsp; Logout</Link>
               </li>
               <div className="dropdown">
-                <a className="btn btn-dark " href="/cart">Cart<span className="badge badge-dark">{products.length>0?products.length:""}</span></a>
+                <Link className="btn btn-dark " to="/cart">Cart<span className="badge badge-dark">{products && products.length>0?products.length:""}</span></Link>
+
                 <div className="dropdown-content">
-                  <a href="/order">Order</a>
-                  <a href="/account">Account</a>
-                  <a href="/aboutus">About us</a>
-                </div>
+                  <Link to="/order">Order</Link>
+                  <Link to="/account">Account</Link>
+                  { user && user.isAdmin?(
+                    <>
+                    <Link to="/dashboard">Dashboard</Link>
+                    </>
+                  ):""}
+               </div>
               </div>
             </>
             ) :
               (<>
                 <li className="nav-item">
-                  <a className="nav-link" href="/login"><i className="fa fa-user"></i>&nbsp; Login</a>
+                  <Link className="nav-link" to="/login"><i className="fa fa-user"></i>&nbsp; Login</Link>
                 </li>
                 <li className="nav-item">
-              <a className="nav-link" href="/cart"><i className="fa fa-cart"></i>&nbsp; Cart <span class="badge badge-dark">{products.length>0?products.length:""}</span></a>
-            </li>
+              <Link className="nav-link" to="/cart"><i className="fa fa-cart"></i>&nbsp; Cart </Link>
+</li>
 
               </>
               )

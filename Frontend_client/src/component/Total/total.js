@@ -1,25 +1,39 @@
 import React, { useState, useEffect } from 'react';
 import {Link} from "react-router-dom";
 import "./total.css";
-
+import {useSelector,useDispatch} from "react-redux";
+import Loader from "../Loader/Loader"
+import {getCart} from "../../Action/cartAction/cartaction";
 const Total = ({ data }) => {
-    const [sum, setSum] = useState(0);
-        
+  
+    const dispatch = useDispatch();
+    const [arr, setArr] = useState([]);
+    const[sum,setSum] = useState(0);
     useEffect(() => {
-         tot();
+        dispatch(getCart());
+    },[dispatch]);
+
+    useEffect(()=>{
+        tot();
+        setArr(products);
     })
+    const { products, loading, error } = useSelector((state) => state.getCartReducer);
+
 
  const tot = () => {
          let add = 0;
-         const arr = data.map(c => {
+         const totalsum = arr.map(c => {
              add = add + (c.productId.price * c.quantity);
          });
          console.log(add);
         setSum(add);
 
-        }
 
-    return (
+        }
+        console.log(arr);
+        console.log(sum);
+
+    return loading? <Loader/>: (
         <>
             <div className="Total">
                     <div className="Total-title">
@@ -27,25 +41,36 @@ const Total = ({ data }) => {
                 </div>
                 <div className="Total-priceitem">
                     <h4>Price:(Item {data.length})</h4>
+                    
+                    <ul>
+                        {data.map(d => {
+                          return  (
+                                <li>{d.productId.price*d.quantity} *  {d.quantity} qty </li>
+                                
+                                
+                            )
+                        })}
+
+                    </ul>
 
                 </div>
                 <hr />
                 <div className="Total-Discount">
-                    <h4>Discount: 30% </h4>
+                    <h4>Discount: <b>30%</b></h4>
         
                 </div>
                 <hr />
                 <div className="Total-shipping">
-                    <h4>Shipping charge:  &#8377;40</h4>
+                    <h4>Shipping charge: <b>{sum>1000?"free":100} </b></h4>
                     <h4>{ }</h4>
                 </div>
                 <hr />
                 <div className="Total-Sum">
-                    <h3>Total: &#8377;{sum}</h3>
+                    <h3>Total:<b> &#8377;{sum}/-</b></h3>
                 </div>
                     <hr/>
                 <div className="cartbox-orderbtn">
-                 <Link to='/orders'><button className="btn btn-dark">Place Order</button> </Link>
+                 <Link to='/checkout'><button className="btn btn-dark">Checkout</button> </Link>
                 </div>   
             </div>
           

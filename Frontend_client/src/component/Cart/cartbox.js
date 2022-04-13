@@ -1,14 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import "./cartbox.css"
+import {useSelector, useDispatch } from 'react-redux';
+import "./cartbox.css";
+import{Link} from "react-router-dom";
+import {getCart} from "../../Action/cartAction/cartaction";
+import Loader from "../Loader/Loader";
+
 import Productcart from './productcart';
 
 const  Cartbox = ({data}) => {
   const [arr, setArr] = useState([]);
 
-  useEffect(() => {
+  
+  
+  useEffect(()=>{
     setArr(data)
   })
-  return (
+
+ 
+  return  (
     <>
       <div className="cartbox">
         <div className="cartbox-title">

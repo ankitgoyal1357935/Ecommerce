@@ -40,6 +40,7 @@ export const getCartReducer = (state = {products:[]}, action) => {
             return {
                 loading:false,
                 products: action.payload.products,
+                
             }
         case "GET_CART_FAIL":
             return {
@@ -78,6 +79,32 @@ export const updateCartReducer = (state = { cart:[] }, action) => {
 
         default: return state;
     }
+
+}
+
+
+export const removeCartReducer = (state={cart:[]},action) =>{
+
+    switch(action.type){
+        case "DELETE_CART_REQUEST": return { 
+                ...state,
+                loading:true
+        }
+        case "DELETE_CART_SUCCESS": return { 
+
+            loading:false,
+            cart: action.payload.cart.products
+        }
+        case "DELETE_CART_FAIL": return { 
+                loading:false,
+                error:action.payload
+    }
+
+        default: return state;
+
+
+}
+
 
 }
 

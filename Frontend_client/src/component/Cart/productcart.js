@@ -3,7 +3,7 @@ import {BsFillCartPlusFill} from "react-icons/bs";
 import ReactStars from "react-rating-stars-component";
 import $ from "jquery";
 import "./productcart.css";
-import { updateCart } from '../../Action/cartAction/cartaction';
+import { updateCart,removeCart } from '../../Action/cartAction/cartaction';
 import { useDispatch } from 'react-redux';
 
 const Productcart = ({product}) => {
@@ -33,20 +33,7 @@ const Productcart = ({product}) => {
 
   };
    
-    const removeToCart=()=>{
-     const Token = localStorage.getItem("token"); 
-     console.log(product.productId._id);
-      $.ajax({
-        url: `http://localhost:7777/api/cart/product/${product.productId._id}`,
-        type:"DELETE",
-        headers: {token:`Bearer ${Token}`, "Content-Type": "application/json"},
-        success: function(data) {
-          setDel(data);
-          window.location.reload();
-         
-        }
-      })
-    }
+   
   
   return (
     <>
@@ -77,7 +64,7 @@ const Productcart = ({product}) => {
                         <button  onClick ={decreaseQuantity} name="dececnum">-</button>
                     </div>
                       <div className="productcart-remove">
-                        <button  className="btn btn-danger" onClick={removeToCart}>Remove</button>
+                        <button  className="btn btn-danger" onClick={()=>dispatch(removeCart(product.productId._id))}>Remove</button>
                       </div>
                       </div>
 

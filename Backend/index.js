@@ -7,6 +7,7 @@ const authRoutes = require("./Routes/auth");
 const ProductRoutes = require("./Routes/products");
 const CartRoutes = require("./Routes/cart");
 const OrderRoutes = require("./Routes/orderroute");
+const Payment = require("./Routes/paymentroute");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 process.on("uncaughtException",(err)=>{
@@ -24,11 +25,16 @@ app.use((err, req, res, next) => {
     console.error(err.message)
     res.status(500).json({sucess:false});
   })
+
+
 app.use("/api/user",userRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/product", ProductRoutes);
 app.use("/api/cart", CartRoutes);
 app.use("/api/orders", OrderRoutes);
+app.use("/api/v1", Payment);
+
+
 
 const server = app.listen(process.env.PORT,()=>{
     console.log('listening on port '+process.env.PORT);

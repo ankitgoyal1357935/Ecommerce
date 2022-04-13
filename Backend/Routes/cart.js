@@ -85,7 +85,7 @@ router.put("/", verifyToken, async (req, res) => {
 
 
 router.delete("/:id", verifyTokenAndAuth, async (req, res) => {
-
+        
     try {
         await Cart.findByIdAndDelete(req.params.id);
         res.status(200).json("item has been deleted...!")
@@ -96,14 +96,16 @@ router.delete("/:id", verifyTokenAndAuth, async (req, res) => {
 
 router.delete("/product/:id", verifyToken, async (req, res) => {
                   console.log(req.params.id);
+                  console.log(req.user.id);
     try {
         
-        let cart = await Cart.findOne({userid:req.user.id});
-        cart.products = (cart.products).filter(product => product.productId._id != req.params.id);
-        cart.save();
-       console.log(cart);
+        let cart = await Cart.findOne({userId:req.user.id});
+        cart.products = cart.products.filter(p => p.productId._id != req.params.id);
+         cart.save();
         
-        res.status(200).json("item has been deleted...!")
+        
+        
+        res.status(200).json({message:"item has been deleted...!",success:true,cart})
     } catch (err) {
         res.status(500).json(err);
     }
