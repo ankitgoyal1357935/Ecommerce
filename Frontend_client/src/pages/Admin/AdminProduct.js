@@ -1,8 +1,18 @@
-import React from 'react'
+import React from 'react';
+import "./AdminProduct.css";
+import{NavLink,Outlet} from "react-router-dom";
+import AProductAdd from "../../component/Dashboard/Product/AProductAdd";
 
 const AdminProduct = () => {
   return (
-    <div>AdminProduct</div>
+    <div className="admin-product">
+          <ul>
+            <li><NavLink to="/dashboard/product/addproduct">Add Product</NavLink></li>
+           
+           
+          </ul>
+        <Outlet/>
+    </div>
   )
 }
 

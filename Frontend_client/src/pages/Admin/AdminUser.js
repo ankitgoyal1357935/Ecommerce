@@ -7,8 +7,8 @@ const AdminUser = () => {
 
           <ul>
             <li><NavLink to="/dashboard/user/getuser">Get User</NavLink></li>
-            <li><NavLink to="/dashboard/user/updateuser">Update User</NavLink></li>
-            <li><NavLink to="/dashboard/user/deleteuser">Delete User</NavLink></li>
+           
+           
           </ul>
         <Outlet/>
       </div>

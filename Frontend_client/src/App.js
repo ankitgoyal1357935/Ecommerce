@@ -32,7 +32,9 @@ import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { useSelector, useDispatch } from "react-redux";
 import { getUserAction } from './Action/authaction';
-import AUserGet from "./component/Dashboard/User/AUserGet"
+import AUserGet from "./component/Dashboard/User/AUserGet";
+import AUserUpdate from "./component/Dashboard/User/AUserUpdate";
+import AProductAdd from "./component/Dashboard/Product/AProductAdd";
 
 function App() {
 
@@ -80,7 +82,14 @@ function App() {
             <Route path="/dashboard" element={user && user.isAdmin ? <Dashboard /> : <Home />} exact >
               <Route path="user" element={<AdminUser />}>
                 <Route path="getuser" element={<AUserGet />} />
+                <Route path="updateuser/:id" element={<AUserUpdate />} />
                </Route>
+               <Route path="product" element={<AdminProduct />} >
+              {/* <Route path="getproduct" element={<AProductGet />} />
+                <Route path="updateproduct" element={<AProductUpdate />} />
+                <Route path="deleteproduct" element={<AProductDelete />} /> */}
+                <Route path="addproduct" element={<AProductAdd />} />
+                </Route>
             </Route>
 
             <Route exact path="/" element={<Home />} />

@@ -7,9 +7,20 @@ const { verifyToken, verifyTokenAndAuth, verifyTokenAndAdmin } = require("./veri
 
 
 router.post("/", verifyTokenAndAdmin, async (req, res) => {
+        let {category} = req.body;
 
+        category = category.split(" ");
 
-    const newProduct = new Product(req.body);
+    const newProduct = new Product({
+        title: req.body.title,
+        desc : req.body.desc,
+        imgsc : req.body.imgsc,
+        category: category,
+        brand : req.body.brand,
+        price : req.body.price,
+        rating : req.body.rating,
+        instock: req.body.instock,
+    });
     console.log(newProduct);
     try {
 
