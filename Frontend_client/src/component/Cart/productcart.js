@@ -70,7 +70,7 @@ const Productcart = ({product}) => {
 
                     </div>
                     <div className="productcart-container3">
-                      <h5>Delivery { new Date().toUTCString()}</h5>
+                      <h5>Delivery { new Date().toLocaleDateString()}</h5>
                     </div>
                     
                 </div>
